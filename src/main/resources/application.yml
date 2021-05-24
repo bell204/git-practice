@@ -1,0 +1,29 @@
+
+spring:
+  application:
+    name: account
+  profiles:
+    group:
+      default: test
+  security:
+    oauth2:
+      client:
+        provider:
+          'KAKAO':
+            authorization-uri: https://kauth.kakao.com/oauth/authorize?prompt=login
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-info-authentication-method: post
+            user-name-attribute: id
+        registration:
+          'KAKAO':
+            client-name: '카카오 로그인'
+            client-id: 345b0cf914e6e65cff98a07215b6a244
+            client-secret: 1gqtgi2kT0tahZn914nC5rG5f3SDmb5r
+            authorization-grant-type: authorization_code
+            redirect-uri: '{baseUrl}/{action}/oauth2/code/{registrationId}'
+            client-authentication-method: post
+  config:
+    import: optional:classpath:security.yml
+server:
+  forward-headers-strategy: framework
